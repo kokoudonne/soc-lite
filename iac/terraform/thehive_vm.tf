@@ -7,7 +7,7 @@ resource "proxmox_vm_qemu" "thehive_vm" {
   cpu     = "host"
   cores   = 2
   sockets = 1
-  memory  = 2048  # 4 Go de RAM
+  memory  = 2048  # 2 Go de RAM
 
   disk {
     size    = "50G"
