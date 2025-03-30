@@ -1,7 +1,7 @@
 resource "proxmox_vm_qemu" "k3svm" {
   name        = "k3svm"
   target_node = "pve02"  # Remplace par le bon nœud
-  clone       = "debian-template"  # Assure-toi que ce template a Cloud-Init activé
+  clone       = "ansible"  # Assure-toi que ce template a Cloud-Init activé
   full_clone  = true
 
   cpu_type     = "host"
