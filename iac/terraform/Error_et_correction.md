@@ -70,4 +70,43 @@ PS C:\Users\kokou\Nextcloud3\soc-lite\iac\terraform> .\terraform.exe plan
 │   with proxmox_vm_qemu.k3svm1,
 │   on thehive_vm.tf line 16, in resource "proxmox_vm_qemu" "k3svm1":
 │   16:     slot    = 0  # Ajout du slot obligatoire
+
+Bug 004: Error in thehive_vm.tf file
+
+PS C:\Users\kokou\Nextcloud3\soc-lite\iac\terraform> .\terraform.exe plan
+╷
+│ Error: Unsupported argument
+│
+│   on thehive_vm.tf line 37:
+│   37:   tags = ["k3s", "kubernate"]
+│
+│ An argument named "tags" is not expected here.
+╵
+╷
+│ Error: Argument or block definition required
+│
+│   on thehive_vm.tf line 38:
+│   38: }
+│
+│ An argument or block definition is required here.
+╵
+
+Bug 005: Error in thehive_vm.tf file
+
+PS C:\Users\kokou\Nextcloud3\soc-lite\iac\terraform> .\terraform.exe plan   
+╷
+│ Warning: Argument is deprecated
+│
+│   with proxmox_vm_qemu.thehive_vm,
+│   on thehive_vm.tf line 7, in resource "proxmox_vm_qemu" "thehive_vm":
+│    7:   cpu     = "host"
+│
+│ use 'cpu_type' instead
+╵
+╷
+│ Error: "name", must only contain alphanumerics, hyphens and dots [thehive_vm]
+│
+│   with proxmox_vm_qemu.thehive_vm,
+│   on thehive_vm.tf line 2, in resource "proxmox_vm_qemu" "thehive_vm":
+│    2:   name        = "thehive_vm"
 │
