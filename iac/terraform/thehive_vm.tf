@@ -1,19 +1,19 @@
-resource "proxmox_vm_qemu" "k3svm1" {
-  name        = "k3svm1"
+resource "proxmox_vm_qemu" "thehive_vm" {
+  name        = "thehive_vm"
   target_node = "pve02"  # Remplace par le bon nœud
   clone       = "debian-template"  # Assure-toi que ce template a Cloud-Init activé
   full_clone  = true
 
-  cpu_type    = "host"
+  cpu     = "host"
   cores   = 2
   sockets = 1
   memory  = 2048  # 2 Go de RAM
 
   disk {
     size    = "50G"
-    type    = "scsi"
+    type    = "disk"  # Correction : utiliser "disk" au lieu de "scsi"
     storage = "diskext4to"  # Vérifie le nom exact du stockage
-    slot    = 0  # Ajout du slot obligatoire
+    slot    = "scsi0"  # Correction : utiliser un slot valide (ex: scsi0, virtio0, etc.)
   }
 
   network {
@@ -32,4 +32,7 @@ resource "proxmox_vm_qemu" "k3svm1" {
 
   ciuser     = "admin"  # Spécifie un utilisateur Cloud-Init si nécessaire
   cipassword = "SecurePassword123!"  # Optionnel, à éviter pour la sécurité (utilise plutôt les clés SSH)
+}
+  # Optionnel : ajouter des tags ou des labels
+  tags = ["k3s", "kubernate"]
 }
