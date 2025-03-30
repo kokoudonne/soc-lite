@@ -110,3 +110,27 @@ PS C:\Users\kokou\Nextcloud3\soc-lite\iac\terraform> .\terraform.exe plan
 │   on thehive_vm.tf line 2, in resource "proxmox_vm_qemu" "thehive_vm":
 │    2:   name        = "thehive_vm"
 │
+
+Bug 006: Error in thehive_vm.tf file
+
+PS C:\Users\kokou\Nextcloud3\soc-lite\iac\terraform> .\terraform.exe plan
+data.vault_generic_secret.proxmox: Reading...
+data.vault_generic_secret.vault_token: Reading...
+
+Planning failed. Terraform encountered an error while generating this plan.
+
+╷
+│ Error: no vault token set on Client
+│
+│   with data.vault_generic_secret.proxmox,
+│   on main.tf line 15, in data "vault_generic_secret" "proxmox":
+│   15: data "vault_generic_secret" "proxmox" {
+│
+╵
+╷
+│ Error: no vault token set on Client
+│
+│   with data.vault_generic_secret.vault_token,
+│   on main.tf line 20, in data "vault_generic_secret" "vault_token":
+│   20: data "vault_generic_secret" "vault_token" {
+│
