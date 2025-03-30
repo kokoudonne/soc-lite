@@ -1,10 +1,10 @@
-resource "proxmox_vm_qemu" "thehive_vm" {
-  name        = "thehive_vm"
+resource "proxmox_vm_qemu" "k3svm1" {
+  name        = "k3svm1"
   target_node = "pve02"  # Remplace par le bon nœud
   clone       = "debian-template"  # Assure-toi que ce template a Cloud-Init activé
   full_clone  = true
 
-  cpu     = "host"
+  cpu_type    = "host"
   cores   = 2
   sockets = 1
   memory  = 2048  # 2 Go de RAM
