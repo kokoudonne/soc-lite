@@ -30,6 +30,6 @@ resource "proxmox_vm_qemu" "k3svm" {
   ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzFD9quYfNgk1UV1cEeUnrz3ZZEC0i0Bx8O8whT+ri3Ywv3pF/cuSiVAV9eiwVq95bxVk7311GawxDh13e+hodT4KzE1kgPusPXv8c4d08ZRgebhHRm48WgH1fJmrRiyhzTNs9rAoTG3p6NauVwNhKjnW1kPtB7UVC/5aD24idtF9JC9TY25J4VOrGfKW0tkdUxPxTKCIbpeIKvu/lz3wxKsR6fXNXBe+54F+UrZY9FaW1/toAq7Kfzp0gXnH2aD1cUAIhC41ZvtJa45D0WO9/r8RQ8W4AJOWAApG/MDwoGdcbstCCHMVCXAVrQXu64c0Wfc3UDLxIHmKKvVYZMVQ7LDOm5P5j0/ED3eqz5fPX+yd2MiolrP7z0+li7IcPPeCCUq6xF2cZZhtQdqIKbmRoyFrLpoG6Oivmn70cN8XpawlrihIbPZQzT3Mu4qQT3V867YdK84n74x0//RJE2z4Zi6tfa0PZj42iaPyDWWT+n7BCUUQM9B8IoVADv+Chx1c= kokou@fcconsulting_pc
   EOT
 
-  ciuser     = "admin"  # Spécifie un utilisateur Cloud-Init si nécessaire
-  cipassword = "SecurePassword123!"  # Optionnel, à éviter pour la sécurité (utilise plutôt les clés SSH)
+  ciuser     = "cool"  # Spécifie un utilisateur Cloud-Init si nécessaire
+  cipassword = "mustbech@nge"  # Optionnel, à éviter pour la sécurité (utilise plutôt les clés SSH)
 }
