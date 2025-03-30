@@ -52,6 +52,7 @@ PS C:\Users\kokou\Nextcloud3\soc-lite\iac\terraform> .\terraform.exe plan
 │   on thehive_vm.tf line 16, in resource "proxmox_vm_qemu" "thehive_vm":
 │   16:     slot    = 0  # Ajout du slot obligatoire
 │
+
 Bug 003: Error in thehive_vm.tf file
 
 PS C:\Users\kokou\Nextcloud3\soc-lite\iac\terraform> .\terraform.exe plan
