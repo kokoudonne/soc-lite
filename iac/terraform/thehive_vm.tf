@@ -33,4 +33,3 @@ resource "proxmox_vm_qemu" "k3svm" {
   ciuser     = "admin"  # Spécifie un utilisateur Cloud-Init si nécessaire
   cipassword = "SecurePassword123!"  # Optionnel, à éviter pour la sécurité (utilise plutôt les clés SSH)
 }
- 
