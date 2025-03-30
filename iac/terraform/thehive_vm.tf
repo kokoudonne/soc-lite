@@ -13,9 +13,11 @@ resource "proxmox_vm_qemu" "thehive_vm" {
     size    = "50G"
     type    = "scsi"
     storage = "diskext4to"  # Vérifie le nom exact du stockage
+    slot    = 0  # Ajout du slot obligatoire
   }
 
   network {
+    id     = 0  # Ajout de l'ID obligatoire
     model  = "virtio"
     bridge = "vmbr0"  # Vérifie le bridge réseau utilisé sur ton Proxmox
   }
