@@ -295,3 +295,27 @@ Plan: 1 to add, 0 to change, 0 to destroy.
 ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
 
 Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
+
+Tout semble bien configuré, et Terraform est prêt à appliquer le plan pour créer la VM **k3svm** sur ton Proxmox. Quelques points à vérifier avant d'exécuter `terraform apply` :  
+
+1. **Stockage (`diskext4to`)** : Assure-toi que le nom du stockage est correct et disponible sur **pve02**. Tu peux le vérifier via `pvesm status`.  
+
+2. **Template `debian-template`** : Vérifie qu'il est bien configuré avec **Cloud-Init**. Sinon, la configuration réseau et SSH risque de ne pas s'appliquer correctement.  
+
+3. **Clé SSH** : L'ajout de la clé publique SSH est bien configuré. Assure-toi que tu pourras te connecter avec `ssh admin@192.168.1.100`.  
+
+4. **Vérification réseau** : Vérifie que l’IP statique **192.168.1.100** ne soit pas déjà utilisée sur ton réseau.  
+
+Si tout est bon, lance :  
+
+```sh
+terraform apply
+```  
+
+Si tu veux valider le plan avant l’application, utilise :  
+
+```sh
+terraform apply -auto-approve
+```  
+
+Tiens-moi au courant si tu rencontres un souci 🚀.
