@@ -134,3 +134,62 @@ Planning failed. Terraform encountered an error while generating this plan.
 │   on main.tf line 20, in data "vault_generic_secret" "vault_token":
 │   20: data "vault_generic_secret" "vault_token" {
 │
+
+Apport solution Bug 006:
+
+### **Erreur détectée**  
+L'erreur **"no vault token set on Client"** indique que Terraform ne trouve pas le **Vault Token** nécessaire pour s'authentifier à Vault.
+
+---
+
+### **Solutions possibles :**
+
+#### **1️⃣ Vérifier que `VAULT_TOKEN` est défini**
+Terraform doit avoir accès à `VAULT_TOKEN`. Assure-toi que la variable d'environnement est bien définie avant d'exécuter `terraform plan` :  
+
+##### **Sous Windows (PowerShell)**
+```powershell
+$env:VAULT_TOKEN="s3cr3t-tok3n"
+```
+
+##### **Sous Linux/macOS**
+```bash
+export VAULT_TOKEN="s3cr3t-tok3n"
+```
+
+---
+
+#### **2️⃣ Vérifier la connexion à Vault**  
+Avant de relancer Terraform, teste si Vault répond correctement :  
+
+```bash
+vault status
+```
+Si Vault est **scellé (`sealed`)**, tu dois d'abord le déverrouiller avec `vault operator unseal`.
+
+Ensuite, essaie de récupérer les secrets manuellement :
+```bash
+vault kv get secret/proxmox
+vault kv get secret/terraform
+```
+Si ces commandes échouent, vérifie les droits d'accès des secrets.
+
+---
+
+#### **3️⃣ Ajouter `VAULT_TOKEN` dans Terraform**  
+Si tu ne veux pas passer par les variables d'environnement, ajoute ceci à ton provider Vault :
+
+```hcl
+provider "vault" {
+  address = "http://192.168.1.26:8200"
+  token   = "s3cr3t-tok3n"  # ⚠️ À éviter en production, préfère une variable d'environnement
+}
+```
+⚠️ **Ne jamais stocker un token Vault en dur dans les fichiers Terraform** en production !
+
+---
+
+### **Recommandation Sécurité**  
+Utilise **un rôle AppRole avec des credentials temporaires** plutôt que `VAULT_TOKEN` statique pour sécuriser l'accès.
+
+Si le problème persiste, dis-moi où tu en es ! 🚀
