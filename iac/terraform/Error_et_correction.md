@@ -476,4 +476,106 @@ clone = "debian-template"
 ```
 Si le nom est mal orthographié ou différent dans Proxmox, Terraform ne pourra pas le trouver.
 
-Essaie ces étapes et dis-moi si le problème persiste. 🚀
+Output de la commande `terraform plan` après correction des bugs :
+
+
+PS C:\Users\kokou\Nextcloud3\soc-lite\iac\terraform> .\terraform.exe plan
+data.vault_generic_secret.proxmox: Reading...
+data.vault_generic_secret.vault_token: Reading...
+data.vault_generic_secret.proxmox: Read complete after 0s [id=secret/proxmox]
+data.vault_generic_secret.vault_token: Read complete after 0s [id=secret/terraform]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # proxmox_vm_qemu.k3svm will be created
+  + resource "proxmox_vm_qemu" "k3svm" {
+      + additional_wait        = 5
+      + agent                  = 0
+      + automatic_reboot       = true
+      + balloon                = 0
+      + bios                   = "seabios"
+      + boot                   = (known after apply)
+      + bootdisk               = (known after apply)
+      + cipassword             = (sensitive value)
+      + ciupgrade              = false
+      + ciuser                 = "cool"
+      + clone                  = "ansible"
+      + clone_wait             = 10
+      + cores                  = 2
+      + cpu_type               = "host"
+      + default_ipv4_address   = (known after apply)
+      + default_ipv6_address   = (known after apply)
+      + define_connection_info = true
+      + desc                   = "Managed by Terraform."
+      + force_create           = false
+      + full_clone             = true
+      + hotplug                = "network,disk,usb"
+      + id                     = (known after apply)
+      + ipconfig0              = "ip=192.168.1.100/24,gw=192.168.1.1"
+      + kvm                    = true
+      + linked_vmid            = (known after apply)
+      + memory                 = 2048
+      + name                   = "k3svm"
+      + onboot                 = false
+      + os_type                = "cloud-init"
+      + protection             = false
+      + reboot_required        = (known after apply)
+      + scsihw                 = "lsi"
+      + skip_ipv4              = false
+      + skip_ipv6              = false
+      + sockets                = 1
+      + ssh_host               = (known after apply)
+      + ssh_port               = (known after apply)
+      + sshkeys                = <<-EOT
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzFD9quYfNgk1UV1cEeUnrz3ZZEC0i0Bx8O8whT+ri3Ywv3pF/cuSiVAV9eiwVq95bxVk7311GawxDh13e+hodT4KzE1kgPusPXv8c4d08ZRgebhHRm48WgH1fJmrRiyhzTNs9rAoTG3p6NauVwNhKjnW1kPtB7UVC/5aD24idtF9JC9TY25J4VOrGfKW0tkdUxPxTKCIbpeIKvu/lz3wxKsR6fXNXBe+54F+UrZY9FaW1/toAq7Kfzp0gXnH2aD1cUAIhC41ZvtJa45D0WO9/r8RQ8W4AJOWAApG/MDwoGdcbstCCHMVCXAVrQXu64c0Wfc3UDLxIHmKKvVYZMVQ7LDOm5P5j0/ED3eqz5fPX+yd2MiolrP7z0+li7IcPPeCCUq6xF2cZZhtQdqIKbmRoyFrLpoG6Oivmn70cN8XpawlrihIbPZQzT3Mu4qQT3V867YdK84n74x0//RJE2z4Zi6tfa0PZj42iaPyDWWT+n7BCUUQM9B8IoVADv+Chx1c= kokou@fcconsulting_pc
+        EOT
+      + tablet                 = true
+      + tags                   = (known after apply)
+      + target_node            = "pve02"
+      + unused_disk            = (known after apply)
+      + vcpus                  = 0
+      + vm_state               = "running"
+      + vmid                   = (known after apply)
+
+      + disk {
+          + backup               = true
+          + id                   = (known after apply)
+          + iops_r_burst         = 0
+          + iops_r_burst_length  = 0
+          + iops_r_concurrent    = 0
+          + iops_wr_burst        = 0
+          + iops_wr_burst_length = 0
+          + iops_wr_concurrent   = 0
+          + linked_disk_id       = (known after apply)
+          + mbps_r_burst         = 0
+          + mbps_r_concurrent    = 0
+          + mbps_wr_burst        = 0
+          + mbps_wr_concurrent   = 0
+          + passthrough          = false
+          + size                 = "50G"
+          + slot                 = "scsi0"
+          + storage              = "diskext4to"
+          + type                 = "disk"
+        }
+
+      + network {
+          + bridge    = "vmbr0"
+          + firewall  = false
+          + id        = 0
+          + link_down = false
+          + macaddr   = (known after apply)
+          + model     = "virtio"
+        }
+
+      + smbios (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+
+Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
+PS C:\Users\kokou\Nextcloud3\soc-lite\iac\terraform> 
